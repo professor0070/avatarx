@@ -1,0 +1,38 @@
+export function sanitizeUser(user: unknown) {
+  const u = user as any;
+  return {
+    id: u._id?.toString?.() ?? null,
+    clerkId: u.clerkId ?? null,          // ← added so frontend can identify Clerk user
+    username: u.username ?? null,
+    email: u.email ?? null,
+    displayName: u.displayName ?? null,
+    imvuId: u.imvuId ?? null,
+    imvuUsername: u.imvuUsername ?? '',
+    credits: u.credits ?? 0,
+    role: (u.activeRole === 'user' ? 'buyer' : u.activeRole) ?? (u.role === 'user' ? 'buyer' : u.role) ?? 'buyer',
+    roles: ((u.roles && u.roles.length > 0) ? u.roles : (u.role ? [u.role] : ['buyer'])).map((r: string) => r === 'user' ? 'buyer' : r),
+    activeRole: (u.activeRole === 'user' ? 'buyer' : u.activeRole) ?? (u.role === 'user' ? 'buyer' : u.role) ?? 'buyer',
+    avatar: u.avatar ?? '',
+    badges: (u.badges ?? []) as unknown[],
+    sellerLevel: u.sellerLevel ?? 'new',
+    isEmailVerified: Boolean(u.isEmailVerified),
+    isAgeVerified: Boolean(u.isAgeVerified),
+    isCloudinaryVerified: Boolean(u.isCloudinaryVerified),
+    isIdVerified: Boolean(u.isIdVerified),
+    isProfileVerified: Boolean(u.isProfileVerified),
+    verificationBadge: Boolean(u.verificationBadge),
+    isAvailable: Boolean(u.isAvailable),
+    outOfOfficeUntil: u.outOfOfficeUntil ?? null,
+    outOfOfficeMessage: (u.outOfOfficeMessage ?? '') as string,
+    isOnline: Boolean(u.isOnline),
+    lastSeen: u.lastSeen ?? null,
+    bio: u.bio ?? '',
+    skills: (u.skills ?? []) as string[],
+    languages: (u.languages ?? []) as string[],
+    certifications: (u.certifications ?? []) as string[],
+    portfolio: (u.portfolio ?? []) as { url: string; type: 'image' | 'video'; title: string }[],
+    payoutMethods: u.payoutMethods ?? {},
+    createdAt: u.createdAt ?? null,
+    updatedAt: u.updatedAt ?? null,
+  };
+}

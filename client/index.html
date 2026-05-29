@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Content Security Policy - Development mode (Vite HMR requires unsafe-inline) -->
+    <!-- For production: Use nonce or hash-based CSP, remove unsafe-inline -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://avatarx-backend-tr25.onrender.com http://localhost:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https: data:; connect-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://avatarx-backend-tr25.onrender.com wss://avatarx-backend-tr25.onrender.com http://localhost:3000 ws://localhost:3000; frame-src 'self' https://challenges.cloudflare.com https://*.clerk.accounts.dev; img-src 'self' data: https://img.clerk.com; worker-src 'self' blob:;">
+
+    <!-- Preconnect hints for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+
+    <!-- SEO Meta Tags -->
+    <title>AvatarX - Metaverse Marketplace for Services & Products</title>
+    <meta name="description" content="AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services. Connect with freelancers and buyers worldwide.">
+    <meta name="keywords" content="Metaverse, marketplace, freelancers, game credits, outfits, triggers, services, digital products">
+    <meta name="author" content="AvatarX">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AvatarX - Metaverse Marketplace for Services & Products">
+    <meta property="og:description" content="AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://avatarx.com">
+    <meta property="og:image" content="https://avatarx.com/logo.svg">
+    <meta property="og:site_name" content="AvatarX">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AvatarX - Metaverse Marketplace for Services & Products">
+    <meta name="twitter:description" content="AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services.">
+    <meta name="twitter:image" content="https://avatarx.com/logo.svg">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#4f46e5" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
+
+    <!-- FOUC Prevention Script - External file for CSP compliance -->
+    <script src="/fouc-prevention.js"></script>
+  </head>
+  <body>
+    <!-- NoScript Fallback -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: system-ui, sans-serif;">
+        <h1 style="color: #dc2626; margin-bottom: 1rem;">JavaScript Required</h1>
+        <p style="color: #374151; max-width: 600px; margin: 0 auto;">
+          AvatarX requires JavaScript to function properly. Please enable JavaScript in your browser settings and refresh the page.
+        </p>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

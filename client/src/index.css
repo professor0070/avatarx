@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+/* Custom variant for dark mode */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Removed height: 100% to allow native and Lenis smooth scrolling */
+html,
+body {
+  min-height: 100%;
+}
+
+/* CSS-only charcoal gradient for hydration - prevents layout shift during asset load */
+body {
+  background-color: #020202;
+  @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+}
+
