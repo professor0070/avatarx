@@ -173,14 +173,13 @@ async function main() {
 
   const httpServer = http.createServer(app);
 
+  const socketAllowedOrigins = process.env.NODE_ENV === 'production'
+    ? [process.env.FRONTEND_URL, process.env.CORS_ORIGIN].filter(Boolean) as string[]
+    : ['http://localhost:5173', 'http://localhost:3000', process.env.FRONTEND_URL, process.env.CORS_ORIGIN].filter(Boolean) as string[];
+
   const io = new Server(httpServer, {
     cors: {
-      origin: [
-        'http://localhost:5173',
-        'http://localhost:3000',
-        process.env.FRONTEND_URL,
-        process.env.CORS_ORIGIN
-      ].filter(Boolean) as string[],
+      origin: socketAllowedOrigins.length > 0 ? socketAllowedOrigins : 'http://localhost:5173',
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
