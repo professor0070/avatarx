@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Content Security Policy - Production mode -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://avatarx.onrender.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https: data:; connect-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://avatarx.onrender.com wss://avatarx.onrender.com https://clerk-telemetry.com; frame-src 'self' https://challenges.cloudflare.com https://*.clerk.accounts.dev; img-src 'self' data: https://img.clerk.com; worker-src 'self' blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.clerk.accounts.dev https://challenges.cloudflare.com https://avatarx.onrender.com https://*.avatarx.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com https://*.avatarx.com; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https: data:; connect-src 'self' http://localhost:3000 ws://localhost:3000 https://*.clerk.accounts.dev https://*.clerk.com https://avatarx.onrender.com wss://avatarx.onrender.com https://clerk-telemetry.com https://*.avatarx.com; frame-src 'self' https://challenges.cloudflare.com https://*.clerk.accounts.dev https://*.avatarx.com; img-src 'self' data: https: blob:; media-src 'self' https://res.cloudinary.com; worker-src 'self' blob:;">
 
     <!-- Preconnect hints for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,15 +27,15 @@
     <meta property="og:title" content="AvatarX - Metaverse Marketplace for Services & Products">
     <meta property="og:description" content="AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://avatarx.com">
-    <meta property="og:image" content="https://avatarx.com/logo.svg">
+    <meta property="og:url" content="https://avatarx-client.vercel.app">
+    <meta property="og:image" content="https://avatarx-client.vercel.app/logo192.svg">
     <meta property="og:site_name" content="AvatarX">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AvatarX - Metaverse Marketplace for Services & Products">
     <meta name="twitter:description" content="AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services.">
-    <meta name="twitter:image" content="https://avatarx.com/logo.svg">
+    <meta name="twitter:image" content="https://avatarx-client.vercel.app/logo192.svg">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#4f46e5" media="(prefers-color-scheme: light)">

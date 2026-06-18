@@ -6,6 +6,7 @@ export function LoginPage() {
     <>
       <Helmet>
         <title>Login - AvatarX</title>
+        <link rel="canonical" href="https://avatarx-client.vercel.app/login" />
       </Helmet>
       <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-slate-900">
         <div className="w-full max-w-md space-y-8 flex justify-center">

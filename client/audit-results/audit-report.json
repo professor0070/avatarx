@@ -1,0 +1,84 @@
+{
+  "url": "http://localhost:5173",
+  "timestamp": "2026-06-18T19:34:55.652Z",
+  "pages": [
+    {
+      "route": "/",
+      "status": 200,
+      "screenshot": "02_route__.png"
+    },
+    {
+      "route": "/sign-in",
+      "status": 200,
+      "screenshot": "03_route__sign-in.png"
+    },
+    {
+      "route": "/browse",
+      "status": 200,
+      "screenshot": "04_route__browse.png"
+    },
+    {
+      "route": "/about",
+      "status": 200,
+      "screenshot": "05_route__about.png"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 415 ()",
+      "location": {
+        "url": "https://img.clerk.com/static/google.svg?width=80",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "networkFailures": [],
+  "brokenLinks": [],
+  "performanceMetrics": {
+    "domContentLoaded": 256,
+    "loadComplete": 265,
+    "ttfb": 10,
+    "domInteractive": 78
+  },
+  "securityHeaders": {
+    "content-security-policy": "MISSING ⚠️",
+    "x-frame-options": "MISSING ⚠️",
+    "x-content-type-options": "MISSING ⚠️",
+    "strict-transport-security": "MISSING ⚠️",
+    "referrer-policy": "MISSING ⚠️",
+    "permissions-policy": "MISSING ⚠️"
+  },
+  "seoChecks": {
+    "title": "AvatarX - Virtual Freelance Marketplace | Hire Virtual Talent",
+    "metaDescription": "AvatarX is the premier marketplace for Metaverse services, game credits, outfits, triggers, and custom services. Connect with freelancers and buyers worldwide.",
+    "h1Count": 1,
+    "h1Warning": "✅ OK",
+    "canonical": "https://avatarx-client.vercel.app/",
+    "ogTitle": "AvatarX - Metaverse Marketplace for Services & Products",
+    "ogImage": "https://avatarx-client.vercel.app/logo192.svg"
+  },
+  "accessibilityIssues": [
+    {
+      "type": "info",
+      "message": "46 focusable elements found"
+    }
+  ],
+  "summary": {
+    "totalConsoleErrors": 1,
+    "totalNetworkFailures": 0,
+    "totalBrokenLinks": 0,
+    "totalBrokenImages": 0,
+    "totalMissingAltImages": 0,
+    "totalA11yIssues": 0,
+    "totalPagesAudited": 4,
+    "imageAudit": {
+      "total": 0,
+      "broken": 0,
+      "missingAlt": 0,
+      "details": []
+    }
+  }
+}

@@ -194,7 +194,7 @@ export function AssetUploadPage() {
   };
 
   const allowedRoles = ['seller', 'creator', 'admin', 'super_admin'];
-  if (!user || !allowedRoles.includes(user.activeRole)) {
+  if (!user || !user.activeRole || !allowedRoles.includes(user.activeRole)) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">

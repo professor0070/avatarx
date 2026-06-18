@@ -35,7 +35,9 @@ api.interceptors.request.use(async (config) => {
 
 api.interceptors.response.use(
   (res) => res,
-  (error) => {
+  async (error) => {
+    const config = error.config;
+    
     if (error.response?.status === 401) {
       // Only clear the LOCAL auth store — do NOT call Clerk.signOut().
       // Calling Clerk.signOut() on any 401 causes spurious logouts when:
@@ -45,7 +47,32 @@ api.interceptors.response.use(
       // Clerk manages its own session lifecycle. If the session truly expires,
       // the Clerk SDK will redirect to sign-in on its own.
       useAuthStore.getState().clearSession();
+      return Promise.reject(error);
     }
+
+    if (config) {
+      const isNetworkError = !error.response;
+      const isServerError = error.response && [502, 503, 504].includes(error.response.status);
+
+      if (isNetworkError || isServerError) {
+        const anyConfig = config as any;
+        anyConfig.__retryCount = anyConfig.__retryCount ?? 0;
+        const maxRetries = 3;
+
+        if (anyConfig.__retryCount < maxRetries) {
+          anyConfig.__retryCount += 1;
+          const delay = Math.pow(2, anyConfig.__retryCount) * 1000;
+          console.warn(
+            `API call failed (${error.message || `Status ${error.response?.status}`}). ` +
+            `Retrying attempt ${anyConfig.__retryCount} of ${maxRetries} in ${delay}ms...`
+          );
+          
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          return api(anyConfig);
+        }
+      }
+    }
+
     return Promise.reject(error);
   }
 );

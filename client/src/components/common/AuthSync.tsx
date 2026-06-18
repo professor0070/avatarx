@@ -43,9 +43,10 @@ export function AuthSync() {
           } catch (err: any) {
             console.error('[AuthSync] Failed to sync user from backend:', err);
 
-            if (retryCountRef.current < 3) {
+            if (retryCountRef.current < 6) {
               retryCountRef.current++;
-              const delay = Math.pow(2, retryCountRef.current) * 1000; // 2s, 4s, 8s
+              const delay = Math.pow(2, Math.min(retryCountRef.current, 4)) * 1000; // 2s, 4s, 8s, 16s, 16s, 16s
+              console.warn(`[AuthSync] Sync failed. Retrying attempt ${retryCountRef.current} of 6 in ${delay}ms...`);
               setTimeout(syncUser, delay);
             } else {
               setSyncError('Unable to sync your account. Please refresh the page or try again later.');

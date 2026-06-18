@@ -15,7 +15,6 @@ export function Navbar() {
   
   const user = useAuthStore((s) => s.user);
   const activeMode = useAuthStore((s) => s.activeMode);
-  const setActiveMode = useAuthStore((s) => s.setActiveMode);
   const clearSession = useAuthStore((s) => s.clearSession);
   const setSession = useAuthStore((s) => s.setSession);
   const accessToken = useAuthStore((s) => s.accessToken);
@@ -148,6 +147,7 @@ export function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Find services..."
+                aria-label="Search services"
                 className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 pl-10 text-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
               />
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -325,23 +325,36 @@ export function Navbar() {
                 <div className="px-3 py-1.5 text-xs font-semibold rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800/50">
                   {isCreatorMode ? 'Creator Mode' : 'Buyer Mode'}
                 </div>
-                {isCreatorMode ? (
-                  <div 
-                    className="px-4 py-1.5 text-sm font-semibold rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 cursor-pointer transition-all border border-slate-200 dark:border-slate-700" 
-                    onClick={() => handleRoleSwitch('buyer')}
-                  >
-                    Switch to Buyer
-                  </div>
-                ) : isSeller ? (
-                  <div 
-                    className="px-4 py-1.5 text-sm font-semibold rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 cursor-pointer transition-all border border-indigo-200 dark:border-indigo-800/50" 
-                    onClick={() => handleRoleSwitch(getCreatorRole())}
-                  >
-                    Switch to Creator
-                  </div>
-                ) : null}
               </div>
-              <UserButton afterSignOutUrl="/" />
+              <UserButton afterSignOutUrl="/">
+                <UserButton.MenuItems>
+                  {isCreatorMode ? (
+                    <UserButton.Action 
+                      label="Switch to Buyer Mode" 
+                      labelIcon={
+                        <span className="text-slate-500 mr-2">🔄</span>
+                      }
+                      onClick={() => handleRoleSwitch('buyer')}
+                    />
+                  ) : isSeller ? (
+                    <UserButton.Action 
+                      label="Switch to Creator Mode" 
+                      labelIcon={
+                        <span className="text-slate-500 mr-2">🔄</span>
+                      }
+                      onClick={() => handleRoleSwitch(getCreatorRole())}
+                    />
+                  ) : (
+                    <UserButton.Action 
+                      label="Become a Creator" 
+                      labelIcon={
+                        <span className="text-emerald-500 mr-2">✨</span>
+                      }
+                      onClick={() => navigate('/creator-onboarding')}
+                    />
+                  )}
+                </UserButton.MenuItems>
+              </UserButton>
             </SignedIn>
 
             <SignedOut>
@@ -382,6 +395,7 @@ export function Navbar() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Find services..."
+                    aria-label="Search services"
                     className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 pl-10 text-sm focus:border-green-500 focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                   />
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -462,7 +476,15 @@ export function Navbar() {
                       >
                         Switch to Creator Mode
                       </NavLink>
-                    ) : null}
+                    ) : (
+                      <NavLink
+                        to="/creator-onboarding"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block px-4 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-900/20 rounded-lg"
+                      >
+                        Become a Creator
+                      </NavLink>
+                    )}
                     
                     <NavLink
                       to="/orders"

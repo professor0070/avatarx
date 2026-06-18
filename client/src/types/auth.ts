@@ -10,8 +10,8 @@ export type AvatarXUser = {
   displayName: string | null;
   imvuUsername: string;
   role: AvatarXRole;
-  roles: AvatarXRole[];
-  activeRole: AvatarXRole;
+  roles?: AvatarXRole[];
+  activeRole?: AvatarXRole;
   avatar: string;
   badges: BadgeType[];
   sellerLevel: SellerLevel;

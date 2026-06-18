@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -87,6 +87,8 @@ export function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const [showWakeupMessage, setShowWakeupMessage] = useState(false);
+
   // Get filter values from URL params
   const search = searchParams.get('search') || '';
   const category = searchParams.get('category') || '';
@@ -134,6 +136,20 @@ export function BrowsePage() {
       return response.data;
     },
   });
+
+  useEffect(() => {
+    let timer: any;
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setShowWakeupMessage(true);
+      }, 3000);
+    } else {
+      setShowWakeupMessage(false);
+    }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isLoading]);
 
   // Fetch wishlist
   const { data: wishlistData } = useQuery({
@@ -245,6 +261,7 @@ export function BrowsePage() {
       <Helmet>
         <title>Browse Gigs | AvatarX</title>
         <meta name="description" content="Find the perfect gig for your metaverse needs on AvatarX" />
+        <link rel="canonical" href="https://avatarx-client.vercel.app/marketplace" />
       </Helmet>
 
       {/* Header */}
@@ -448,15 +465,26 @@ export function BrowsePage() {
 
           {/* Gig Grid */}
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 12 }).map((_, index) => (
-                <div key={index} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                  <div className="h-40 w-full rounded-lg bg-slate-100 dark:bg-slate-800 mb-4 animate-pulse" />
-                  <div className="h-4 w-3/4 bg-slate-100 dark:bg-slate-800 mb-2 animate-pulse" />
-                  <div className="h-3 w-1/2 bg-slate-100 dark:bg-slate-800 mb-4 animate-pulse" />
-                  <div className="h-6 w-20 bg-slate-100 dark:bg-slate-800 animate-pulse" />
+            <div className="space-y-6">
+              {showWakeupMessage && (
+                <div className="rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-indigo-700 dark:border-indigo-950/30 dark:bg-indigo-950/20 dark:text-indigo-300 animate-fade-in flex items-center gap-3">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent dark:border-indigo-400" />
+                  <div>
+                    <p className="font-semibold text-sm">Waking up the server...</p>
+                    <p className="text-xs opacity-90 mt-0.5">The backend is hosted on a free Render tier and is waking up. This first request can take up to 50 seconds. Thank you for your patience!</p>
+                  </div>
                 </div>
-              ))}
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <div key={index} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                    <div className="h-40 w-full rounded-lg bg-slate-100 dark:bg-slate-800 mb-4 animate-pulse" />
+                    <div className="h-4 w-3/4 bg-slate-100 dark:bg-slate-800 mb-2 animate-pulse" />
+                    <div className="h-3 w-1/2 bg-slate-100 dark:bg-slate-800 mb-4 animate-pulse" />
+                    <div className="h-6 w-20 bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  </div>
+                ))}
+              </div>
             </div>
           ) : gigsData?.gigs?.length > 0 ? (
             <>

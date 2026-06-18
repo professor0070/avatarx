@@ -38,9 +38,10 @@ export function Hero() {
           loop
           muted
           playsInline
+          poster="https://res.cloudinary.com/dc68wrpii/video/upload/f_auto,q_auto,so_0/v1779906687/mp4_ytmnee.jpg"
           className="w-full h-full object-cover opacity-55"
         >
-          <source src="/mp4.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dc68wrpii/video/upload/f_auto,q_auto/v1779906687/mp4_ytmnee.mp4" type="video/mp4" />
         </video>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
@@ -111,10 +112,12 @@ export function Hero() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="What service are you looking for today?"
+                  aria-label="Search for services"
                   className="w-full px-4 py-4 pr-12 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
                 />
                 <button
                   type="submit"
+                  aria-label="Search"
                   className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-green-600 transition-colors"
                 >
                   <Search className="w-6 h-6" />

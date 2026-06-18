@@ -323,7 +323,7 @@ export function GigCreationForm({ gigId }: GigCreationFormProps = {}) {
   }, [step, title, description, category, tags, gallery, thumbnail, tiers]);
 
   const handleSubmit = useCallback(async () => {
-    if (!user || !SELLER_ROLES.includes(user.activeRole)) {
+    if (!user || !user.activeRole || !SELLER_ROLES.includes(user.activeRole)) {
       setError('Only sellers and creators can create gigs');
       return;
     }
@@ -932,7 +932,7 @@ export function GigCreationForm({ gigId }: GigCreationFormProps = {}) {
   // ─── Layer 3 Defence: Early render-time role check ──────────────────────────
   // SellerRoute already blocks at the router level, but this is the last safety
   // net in case someone bypasses the route guard via direct URL manipulation.
-  if (user && !SELLER_ROLES.includes(user.activeRole)) {
+  if (user && (!user.activeRole || !SELLER_ROLES.includes(user.activeRole))) {
     return (
       <div className="mx-auto w-full max-w-4xl">
         <div className="rounded-2xl border border-red-200 bg-red-50 dark:border-red-900/40 dark:bg-red-950/20 p-10 text-center shadow-sm">

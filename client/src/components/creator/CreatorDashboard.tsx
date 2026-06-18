@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { useAuthStore } from '../../store/authStore';
@@ -27,7 +27,7 @@ export function CreatorDashboard() {
     setActiveMode('creator');
   }, [setActiveMode]);
 
-  const { data: gigs, isLoading, refetch } = useQuery<Gig[]>({
+  const { data: gigs, isLoading } = useQuery<Gig[]>({
     queryKey: ['my-gigs'],
     queryFn: async () => {
       const response = await api.get('/api/gigs/my-gigs');

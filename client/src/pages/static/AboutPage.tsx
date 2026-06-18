@@ -19,6 +19,7 @@ export function AboutPage() {
       <Helmet>
         <title>About Us | AvatarX</title>
         <meta name="description" content="Learn about AvatarX - the premier freelance marketplace for the IMVU community" />
+        <link rel="canonical" href="https://avatarx-client.vercel.app/about" />
       </Helmet>
 
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
